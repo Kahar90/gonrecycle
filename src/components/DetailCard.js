@@ -50,18 +50,22 @@ const DetailCard = ({ setMarkerClicked, userLocation, item }) => {
     return date.getHours() >= 8 && date.getHours() <= 17;
   };
 
- 
-
   return (
     <>
       <div class="card w-96 bg-white shadow-xl">
         <div class="card-body">
           <div className="flex flex-row justify-between">
             <h2 class="card-title text-black">{item?.name}</h2>
+            {/* <label htmlFor="my-drawer" className="btn btn-primary drawer-button">
+            Open drawer
+          </label> */}
             <button
               class="bg-transparent text-black mb-8"
               onClick={() => {
-                setMarkerClicked({});
+                setMarkerClicked({
+                  ...item,
+                  visible: false,
+                });
               }}
             >
               <svg
@@ -96,9 +100,13 @@ const DetailCard = ({ setMarkerClicked, userLocation, item }) => {
           </div>
           <div class="card-actions justify-start mt-5">
             <div className="flex flex-row justify-between align-bottom gap-5">
-              <button class="btn btn-primary bg-slate-600 text-white">
+              <label
+                htmlFor="my-drawer"
+                // className="btn btn-primary drawer-button"
+                class="btn btn-primary bg-slate-600 text-white drawer-button"
+              >
                 View Details
-              </button>
+              </label>
               <button class="btn btn-primary bg-slate-600 text-white">
                 Navigate
               </button>
