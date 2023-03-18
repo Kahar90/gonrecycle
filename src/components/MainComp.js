@@ -1,12 +1,16 @@
 import DetailCard from "@/components/DetailCard";
 import Maps from "@/components/Maps";
+import UserContext from "@/utils/UserContext";
 import {
   GoogleMap,
   Marker,
   MarkerF,
   useLoadScript,
 } from "@react-google-maps/api";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import CalculatorDrawer from "./CalculatorDrawer";
 
 const MainComp = ({
@@ -64,9 +68,19 @@ const MainComp = ({
     []
   );
 
+  const Router = useRouter();
+
+  const BackToHome = () => {
+    // alert("logout");
+    Router.push("/");
+  };
+
   if (!isLoaded) {
     return <p>Loading...</p>;
   }
+
+  // get userContext
+  const userContext = useContext(UserContext);
 
   return (
     <>
@@ -75,7 +89,7 @@ const MainComp = ({
         <div className="drawer-content">
           {/* <!-- Page content here --> */}
           <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-gray-100">
-            <div className="flex flex-row items-center justify-center w-full px-14 text-center mb-10  gap-10">
+            <div className="flex flex-row items-center justify-between w-full px-14 text-center mb-10 gap-10">
               <img
                 src="/img/map.png"
                 className="w-32 
@@ -85,7 +99,7 @@ const MainComp = ({
                   setModeList(true);
                 }}
               />
-              <div className="flex flex-col items-center justify-center w-[300px]">
+              <div className="flex flex-col items-center justify-center w-[600px]">
                 <input
                   onChange={(e) => {
                     setSearchBar(e.target.value);
@@ -97,16 +111,10 @@ const MainComp = ({
                 />
               </div>
               <button
-                onClick={() => {
-                  mapFunc.panTo({
-                    lat: userLocation.lat,
-                    lng: userLocation.lng,
-                  });
-                  mapFunc.setZoom(20);
-                }}
-                className="btn btn-primary"
+                onClick={BackToHome}
+                className="btn btn-ghost bg-white border-black shadow-sm hover:bg-gray-100 hover:border-black float-right"
               >
-                panTo Test
+                <Image src="/img/svgs/goback.svg" width={30} height={30} />
               </button>
             </div>
             <div className="  bg-white rounded-box shadow-lg min-h-[600px] w-[95vw]">
