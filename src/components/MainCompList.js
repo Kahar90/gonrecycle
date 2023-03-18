@@ -1,4 +1,6 @@
+import { getAuth } from "firebase/auth";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import FilterComp from "./FilterComp";
 
@@ -52,6 +54,11 @@ const MainCompList = ({
     lat: 3.139,
     lng: 101.6869,
   });
+
+  const Router = useRouter();
+  const BackToHome = () => {
+   Router.push("/");
+  };
 
   // unique entry
   let ItemToFilter = listRecycleCenter.reduce((acc, item) => {
@@ -132,7 +139,7 @@ const MainCompList = ({
 
   return (
     <div className="main-comp-list bg-gray-100 min-h-screen">
-      <div className="flex flex-row items-center justify-center gap-10 w-full px-14 text-center pt-10 ">
+      <div className="flex flex-row items-center justify-between gap-10 w-full px-14 text-center pt-10 ">
         <img
           src="/img/map.png"
           className="w-32 cursor-pointer"
@@ -140,7 +147,7 @@ const MainCompList = ({
             setModeList(false);
           }}
         />
-        <div className="flex flex-col items-center justify-center w-[300px]">
+        <div className="flex flex-row m-auto gap-5 items-center justify-center w-[600px]">
           <input
             value={filter.search}
             onChange={(e) => {
@@ -151,33 +158,39 @@ const MainCompList = ({
             }}
             type="text"
             placeholder="Search recycle centres here"
-            class="input input-bordered w-full max-w-full bg-white shadow-lg"
+            class="input input-bordered w-[600px]  bg-white shadow-lg"
           />
-        </div>
-        <div
-          onClick={() => {
-            setfilterToggled(!filterToggled);
-            setFilter({
-              toFilterName: "",
-              sort: "highFirst", // highFirst, lowFirst, distance
-              search: "",
-            });
-          }}
-          className={
-            "flex flex-row items-center justify-center gap-2 w-12 h-14 bg-white rounded-lg shadow-lg cursor-pointer" +
-            (filterToggled ? " bg-white" : " bg-gray-200")
-          }
-        >
-          <svg
-            width="24"
-            height="24"
-            xmlns="http://www.w3.org/2000/svg"
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+          <div
+            onClick={() => {
+              setfilterToggled(!filterToggled);
+              setFilter({
+                toFilterName: "",
+                sort: "highFirst", // highFirst, lowFirst, distance
+                search: "",
+              });
+            }}
+            className={
+              "flex flex-row items-center justify-center gap-2 w-20 h-14 bg-white rounded-lg shadow-lg cursor-pointer" +
+              (filterToggled ? " bg-white" : " bg-gray-200")
+            }
           >
-            <path d="M23 0l-9 14.146v7.73l-3.996 2.124v-9.853l-9.004-14.147h22zm-20.249 1l8.253 12.853v8.491l1.996-1.071v-7.419l8.229-12.854h-18.478z" />
-          </svg>
+            <svg
+              width="24"
+              height="24"
+              xmlns="http://www.w3.org/2000/svg"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+            >
+              <path d="M23 0l-9 14.146v7.73l-3.996 2.124v-9.853l-9.004-14.147h22zm-20.249 1l8.253 12.853v8.491l1.996-1.071v-7.419l8.229-12.854h-18.478z" />
+            </svg>
+          </div>
         </div>
+        <button
+          onClick={BackToHome}
+          className="btn btn-ghost bg-white border-black shadow-sm hover:bg-gray-100 hover:border-black float-right"
+        >
+          <Image src="/img/svgs/goback.svg" width={30} height={30} />
+        </button>
       </div>
 
       <div className="flex flex-col items-center justify-center px-1 text-left pb-10 gap-11">
