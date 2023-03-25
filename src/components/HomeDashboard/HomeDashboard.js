@@ -33,12 +33,13 @@ const HomeDashboard = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-100 overflow-hidden">
-        <div className="flex flex-row justify-between items-start mt-10 px-48 ">
+      {/* <div className="min-h-screen overflow-hidden bg-[url('/img/background.png')]"> */}
+      <div className="min-h-screen overflow-hidden bg-center bg-no-repeat bg-cover" style={{ backgroundImage: "url('/img/background2.png')" }}>
+        <div className="flex flex-row justify-between items-start mt-10 px-7 ">
           <h1 className="text-2xl text-black font-bold text-left ">
             Welcome to GreenRadar
             {userContext?.displayName
-              ? "," + userContext.displayName?.split(" ")[0] + "!"
+              ? ", " + userContext.displayName?.split(" ")[0] + "!"
               : "!"}
           </h1>
           <button

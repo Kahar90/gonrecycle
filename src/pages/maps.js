@@ -1,6 +1,7 @@
 import MainComp from "@/components/MainComp";
 import MainCompList from "@/components/MainCompList";
 import { useRouter } from "next/router";
+import NavigationBar from "@/components/NavigationBar";
 
 // import { Router } from "next/router";
 import { useEffect, useState } from "react";
@@ -40,6 +41,7 @@ const Maps = () => {
 
   return (
     <>
+      <NavigationBar /> 
       {!modeList ? (
         <MainComp
           listRecycleCenter={recycleCentersList}

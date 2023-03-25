@@ -16,7 +16,7 @@ const CardHome = ({ imgLink, title, subtitle, buttonText, buttonRoute }) => {
         <h2 class="card-title">{title}</h2>
         <p>{subtitle}</p>
         <div class="card-actions justify-end">
-          <button class="btn btn-primary mt-5" onClick={handleRoute}>
+          <button class="btn btn-primary mt-5 bg-dark-green hover:bg-dark-green-hover border-none" onClick={handleRoute}>
             {buttonText}
           </button>
         </div>
