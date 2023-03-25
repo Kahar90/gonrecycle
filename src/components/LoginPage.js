@@ -91,12 +91,13 @@ const LoginPage = () => {
   return (
     <div>
       <ShowToast visible={visible} setVisible={setVisible} />
-
-      <div class="hero min-h-screen bg-gray-100">
+      <div class="hero min-h-screen bg-[url('/img/background.png')]">
         <div class="hero-content flex-col lg:flex-row-reverse">
           <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-white">
             <div class="card-body">
               <div class="form-control">
+                <Image src={"/img/logo.png"} width={250} height={80}/>
+                <br></br>
                 <label class="label">
                   <span class="label-text">Email</span>
                 </label>
