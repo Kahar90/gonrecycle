@@ -9,7 +9,14 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'light-green': '#7FCA27',
+        'dark-green': '#0C6000',
+        'light-green-hover': '#74B723',
+        'dark-green-hover': '#084200',
+      } 
+    },
   },
   plugins: [require("daisyui")],
 }

@@ -13,6 +13,7 @@ import {
   addDoc,
 } from "@firebase/firestore";
 import HomeDashboard from "@/components/HomeDashboard/HomeDashboard";
+import NavigationBar from "@/components/NavigationBar";
 
 const Home = () => {
   // const [modeList, setModeList] = useState(false);
@@ -204,6 +205,7 @@ const Home = () => {
           setModeList={setModeList}
         />
       )} */}
+      <NavigationBar /> 
       <HomeDashboard />
     </>
   );
