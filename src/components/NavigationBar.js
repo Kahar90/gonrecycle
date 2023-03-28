@@ -2,8 +2,16 @@ import React from 'react';
 import Image from "next/image";
 import Link from 'next/link';
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { useState } from "react";
 
 const NavigationBar = () => {
+
+    const [active, setActive] = useState(false);
+
+    const handleClick = () => {
+      setActive(!active);
+    };
+
     const handleLogout = () => {
         // alert("logout");
         const auth = getAuth();
@@ -15,17 +23,17 @@ const NavigationBar = () => {
     return (
         <div className="navbar bg-base-100" style={{ height:'80px' }}>
             <div className="navbar-start">
-                <div className="dropdown">
-                <label tabIndex={0} className="btn btn-ghost btn-circle">
+                <div className="dropdown" >
+                <label tabIndex={0} className="btn btn-ghost btn-circle z-999">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
                 </label>
-                <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><Link href="/">Home</Link></li>
-                    <li><Link href="/about"> About </Link></li>
-                    <li><Link href="/maps"> Recycle </Link></li>
-                    <li><Link href="/tracker"> Tracker</Link></li>
-                    <li><Link href="/chatbot"> Chatbot </Link></li>
-                    <li><Link href="/news&articles"> News & articles </Link></li>
+                <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 menu-compact:active .dropdown-content {background-color: bg-dark-green;}" >
+                    <li tabIndex="0" onFocus={(e) => e.target.style.backgroundColor = '#74B723'}><Link href="/">Home</Link></li>
+                    <li tabIndex="0" onFocus={(e) => e.target.style.backgroundColor = '#74B723'}><Link href="/about"> About </Link></li>
+                    <li tabIndex="0" onFocus={(e) => e.target.style.backgroundColor = '#74B723'}><Link href="/maps"> Recycle </Link></li>
+                    <li tabIndex="0" onFocus={(e) => e.target.style.backgroundColor = '#74B723'}><Link href="/tracker"> Tracker</Link></li>
+                    <li tabIndex="0" onFocus={(e) => e.target.style.backgroundColor = '#74B723'}><Link href="/chatbot"> Chatbot </Link></li>
+                    <li tabIndex="0" onFocus={(e) => e.target.style.backgroundColor = '#74B723'}><Link href="/news&articles"> News & articles </Link></li>
                 </ul>
                 </div>
             </div>

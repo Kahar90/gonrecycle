@@ -1,14 +1,26 @@
 import NavigationBar from "@/components/NavigationBar";
 import Image from 'next/image';
+import Link from 'next/link';
 
 const RecyclingTips = () => {
     return (
         <div>
             <NavigationBar />
             <div className="min-h-screen overflow-hidden p-10">
+                <div className="text-sm breadcrumbs">
+                    <ul>
+                        <li><Link href="/news&articles">News & articles</Link></li> 
+                        <li><Link href="/recycling_tips">Recycling tips</Link></li> 
+                    </ul>
+                </div>
                 <br></br>
                 <br></br>
                 <h1 className="text-2xl font-bold">Recycling tips</h1>
+                <p>
+                    Recycling tips are super important because they can make a big difference in taking care of our planet! When we recycle, we help keep waste out of landfills and reduce pollution, which is great for the environment. 
+                    Recycling also saves natural resources, cuts down on energy use, and helps fight climate change. 
+                    Plus, it's easy to do with some simple tips, like separating your recyclables, making sure they're clean and ready to go, and using local recycling programs. So let's all do our part and recycle as much as we can to help create a cleaner and healthier world for ourselves and future generations!
+                </p>
                 <br></br>
                 <h2><b>Tip #1: Sort Your Waste</b></h2> <br></br>
                 <p>One of the most important things you can do to recycle effectively is to sort your waste properly. Make sure you separate your recyclables from your non-recyclables, and sort your recyclables by material type. This will make it easier for recycling centers to process your waste and ensure that your recyclables are recycled.</p>
