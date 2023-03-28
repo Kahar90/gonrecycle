@@ -66,7 +66,7 @@ const Tracker = () => {
       <div className={styles.container}>
         <div className={styles.prompt}>
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-          <Image src={"/img/logo.png"} width={150} height={60}/>
+          <Image src={"/img/GreenRadarLogo.png"} width={150} height={60}/>
         </div>
           <h1>Sorry, this page is under development.</h1>
           <p>Please come back later.</p>
