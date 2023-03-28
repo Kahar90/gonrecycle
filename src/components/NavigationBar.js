@@ -40,7 +40,7 @@ const NavigationBar = () => {
 
             <div className="navbar-center">
                 <Link href="/">
-                    <Image src={"/img/logo.png"} width={200} height={50}/>
+                    <Image src={"/img/GreenRadarLogo.png"} width={200} height={50}/>
                 </Link>
             </div>
 
