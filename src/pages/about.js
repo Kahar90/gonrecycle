@@ -30,9 +30,11 @@ const AboutUsPage = () => {
             <br></br>
             <div className="text-right">
                     <Link href="/maps">
-                        <button className="bg-dark-green hover:bg-dark-green-hover text-white font-bold py-2 px-4 rounded mr-12">Jom recycle!</button>
+                        <button className="bg-dark-green hover:bg-dark-green-hover text-white py-2 px-4 rounded mr-12">Jom recycle!</button>
                     </Link>
             </div> 
+            <br></br>
+            <br></br>
         </div>
     );
   }

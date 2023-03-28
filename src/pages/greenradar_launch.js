@@ -1,10 +1,17 @@
 import NavigationBar from "@/components/NavigationBar";
+import Link from 'next/link';
 
 const GreenRadarLaunch = () => {
     return (
         <div>
             <NavigationBar />
             <div className="min-h-screen overflow-hidden p-10">
+                <div className="text-sm breadcrumbs">
+                    <ul>
+                        <li><Link href="/news&articles">News & articles</Link></li> 
+                        <li><Link href="/greenradar_launch">GreenRadar launch</Link></li> 
+                    </ul>
+                </div>
                 <br></br>
                 <br></br>
                 <h1 className="text-2xl font-bold">GreenRadar launch</h1>

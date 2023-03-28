@@ -12,6 +12,8 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import CalculatorDrawer from "./CalculatorDrawer";
+import { useWindowSize } from 'react-use-size';
+
 
 const MainComp = ({
   setModeList,
@@ -19,6 +21,13 @@ const MainComp = ({
   markerSet,
   listRecycleCenter,
 }) => {
+  let width;
+
+  if (typeof window !== 'undefined') {
+    const { width: windowWidth } = useWindowSize();
+    width = windowWidth;
+  }
+  
   const mapRef = useRef();
   const libraries = useMemo(() => ["places"], []);
   const { isLoaded } = useLoadScript({
@@ -89,8 +98,67 @@ const MainComp = ({
         <div className="drawer-content">
           {/* <!-- Page content here --> */}
           <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-gray-100">
-            <div className="flex flex-row items-center justify-between w-full px-14 text-center mb-10 gap-10">
-              <img
+            <div className="flex flex-wrap flex-row items-center justify-between w-full px-14 text-center mt-5 mb-10 gap-10">
+            {width > 640 ? (
+                <>
+                  <img
+                    src="/img/map.png"
+                    className="w-32 border-2 border-[#1C850B] cursor-pointer rounded-lg"
+                    onClick={() => {
+                      setModeList(true);
+                    }}
+                  />
+                  <div className="flex flex-col items-center text-center justify-center w-[600px] md:w-[600px]">
+                    <input
+                      onChange={(e) => {
+                        setSearchBar(e.target.value);
+                        console.log(searchBar);
+                      }}
+                      type="text"
+                      placeholder="Search recycle centres here"
+                      className="input input-bordered w-full max-w-full bg-white shadow-lg"
+                    />
+                  </div>
+
+                  <button
+                    onClick={BackToHome}
+                    className="btn btn-ghost bg-white border-black shadow-sm hover:bg-gray-100 hover:border-black float-right"
+                  >
+                    <Image src="/img/svgs/goback.svg" width={30} height={30} />
+                  </button>
+                </>
+              ) : (
+                <>
+                  <img
+                    src="/img/map.png"
+                    className="w-32 border-2 border-[#1C850B] cursor-pointer rounded-lg"
+                    onClick={() => {
+                      setModeList(true);
+                    }}
+                  />
+
+                  <button
+                    onClick={BackToHome}
+                    className="btn btn-ghost bg-white border-black shadow-sm hover:bg-gray-100 hover:border-black float-right"
+                  >
+                    <Image src="/img/svgs/goback.svg" width={30} height={30} />
+                  </button>
+
+                  <div className="flex flex-col items-center text-center justify-center w-[600px] md:w-[600px]">
+                    <input
+                      onChange={(e) => {
+                        setSearchBar(e.target.value);
+                        console.log(searchBar);
+                      }}
+                      type="text"
+                      placeholder="Search recycle centres here"
+                      className="input input-bordered w-full max-w-full bg-white shadow-lg"
+                    />
+                  </div>
+
+                </>
+            )}
+              {/* <img
                 src="/img/map.png"
                 className="w-32 
             border-2 border-[#1C850B] cursor-pointer rounded-lg
@@ -99,7 +167,8 @@ const MainComp = ({
                   setModeList(true);
                 }}
               />
-              <div className="flex flex-col items-center justify-center w-[600px]">
+
+              <div className="flex flex-col w-full max-w-full items-center text-center justify-center w-[600px] md:w-[600px]">
                 <input
                   onChange={(e) => {
                     setSearchBar(e.target.value);
@@ -115,7 +184,7 @@ const MainComp = ({
                 className="btn btn-ghost bg-white border-black shadow-sm hover:bg-gray-100 hover:border-black float-right"
               >
                 <Image src="/img/svgs/goback.svg" width={30} height={30} />
-              </button>
+              </button> */}
             </div>
             <div className="  bg-white rounded-box shadow-lg min-h-[600px] w-[95vw]">
               {/* init google maps */}

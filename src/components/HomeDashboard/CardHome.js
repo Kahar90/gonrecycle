@@ -10,7 +10,7 @@ const CardHome = ({ imgLink, title, subtitle, buttonText, buttonRoute }) => {
   return (
     <div class="card card-compact w-96 bg-base-100 shadow-xl">
       <figure className="h-[200px]">
-        <img src={imgLink} alt="Shoes" className="object-fill" />
+        <img src={imgLink} className="object-fill" />
       </figure>
       <div class="card-body">
         <h2 class="card-title">{title}</h2>

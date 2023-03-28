@@ -11,7 +11,6 @@ const ExampleComponent = () => {
   return (
     <div className="relative">
       <NavigationBar />
-
       <iframe 
         src="https://console.dialogflow.com/api-client/demo/embedded/b17d9010-2f94-428b-b6fb-27e8c8fd0c4a"
         style={iframeStyle}
