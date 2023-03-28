@@ -14,6 +14,7 @@ import {
 } from "@firebase/firestore";
 import HomeDashboard from "@/components/HomeDashboard/HomeDashboard";
 import NavigationBar from "@/components/NavigationBar";
+import SliderComponent from "@/components/HomeDashboard/Slider";
 
 const Home = () => {
   // const [modeList, setModeList] = useState(false);
@@ -205,8 +206,10 @@ const Home = () => {
           setModeList={setModeList}
         />
       )} */}
-      <NavigationBar /> 
+      <NavigationBar />
+      <div style={{ height: '80px' }}></div>
       <HomeDashboard />
+      <SliderComponent />
     </>
   );
 };
