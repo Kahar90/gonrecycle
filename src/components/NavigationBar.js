@@ -3,8 +3,16 @@ import Image from "next/image";
 import Link from 'next/link';
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { useState } from "react";
+import { useWindowSize } from 'react-use-size';
 
 const NavigationBar = () => {
+
+    let width;
+
+    if (typeof window !== 'undefined') {
+      const { width: windowWidth } = useWindowSize();
+      width = windowWidth;
+    }
 
     const [active, setActive] = useState(false);
 
@@ -37,12 +45,23 @@ const NavigationBar = () => {
                 </ul>
                 </div>
             </div>
-
-            <div className="navbar-center">
-                <Link href="/">
-                    <Image src={"/img/GreenRadarLogo.png"} width={200} height={50}/>
-                </Link>
-            </div>
+            {width > 640 ? (
+                <>
+                    <div className="navbar-center">
+                        <Link href="/">
+                            <Image src={"/img/GreenRadarLogo.png"} width={200} height={50}/>
+                        </Link>
+                    </div>
+                </>
+            ) : (
+                <> 
+                    <div className="navbar-center">
+                        <Link href="/">
+                            <Image src={"/img/GreenRadarLogo.png"} width={150} height={60}/>
+                        </Link>
+                    </div>
+                </>
+            )}
 
             <div className="navbar-end">
                 <button className="btn btn-ghost btn-circle">
