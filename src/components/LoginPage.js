@@ -96,7 +96,7 @@ const LoginPage = () => {
           <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-white">
             <div class="card-body">
               <div class="form-control">
-                <Image src={"/img/logo.png"} width={250} height={80}/>
+                <Image src={"/img/GreenRadarLogo.png"} width={250} height={80}/>
                 <br></br>
                 <label class="label">
                   <span class="label-text">Email</span>
