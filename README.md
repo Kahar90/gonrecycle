@@ -5,3 +5,6 @@ How to run this locally:
 2. Run `npm install`
 3. Run `npm run dev`
 4. View the app in http://localhost:3000/
+
+
+SOME FEATURES MAY NOT WORK LOCALLY. PLEASE REFER TO DEPLOYED WEBSITE FOR TESTING. https://gonrecycle.vercel.app/
