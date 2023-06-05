@@ -10,7 +10,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { Button, Form, Input, Space, message } from "antd";
 
-const LoginPage = () => {
+const SignupPage = () => {
   const firebaseConfig = {
     apiKey: "AIzaSyBE3hGqOSI5j1D40aTreuEb5W6h3kngcXs",
     authDomain: "gonrecycle-4e916.firebaseapp.com",
@@ -36,7 +36,7 @@ const LoginPage = () => {
   const handleSignInEmailPass = async (values) => {
     info("Processing...");
     try {
-      let result = await signInWithEmailAndPassword(
+      let result = await createUserWithEmailAndPassword(
         firebaseAuth,
         values.username,
         values.password
@@ -80,7 +80,7 @@ const LoginPage = () => {
               marginBottom: "20px",
             }}
           >
-            Login
+            Sign up
           </h1>
 
           <Form
@@ -142,18 +142,19 @@ const LoginPage = () => {
                   type="secondary"
                   htmlType="submit"
                 >
-                  Login
+                  Create Account
                 </Button>
                 <Button
                   style={{
                     backgroundColor: "#fff",
                     color: "#1890ff",
                     borderColor: "#1890ff",
+                    marginRight: "100px",
                   }}
                   type="primary"
-                  onClick={() => Router.push("/signup")}
+                  onClick={() => Router.push("/login")}
                 >
-                  Sign Up
+                  Login
                 </Button>
               </Space>
             </Form.Item>
@@ -164,4 +165,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignupPage;
