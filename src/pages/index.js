@@ -1,6 +1,6 @@
 import Checkout from "@/components/checkout";
 import { Button, Space, Table } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Home = () => {
   const [userOrder, setUserOrder] = useState([]);
@@ -69,69 +69,89 @@ const Home = () => {
     borderColor: "#1890ff",
   };
 
+  const [userPerm, setuserPerm] = useState(null);
+
+  const getUserPermission = async () => {
+    try {
+      const res = await axios.get("/api/2facheck");
+      console.log(res);
+      setuserPerm(res.data.permission);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getUserPermission();
+  }, []);
+
   return (
     <>
-      {checkoutState ? (
-        <>
-          <div
-            style={{
-              padding: "30px",
-              backgroundColor: "white",
-              minHeight: "100vh",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              overflow: "hidden",
-              flexDirection: "column",
-            }}
-          >
-            <h1
+      {userPerm !== "admin" ? (
+        checkoutState ? (
+          <>
+            <div
               style={{
-                fontSize: "30px",
-                fontWeight: "bold",
+                padding: "30px",
+                backgroundColor: "white",
+                minHeight: "100vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                overflow: "hidden",
+                flexDirection: "column",
               }}
             >
-              Checkout
-            </h1>
-            <p
-              style={{
-                fontSize: "20px",
-                marginBottom: "20px",
-              }}
-            >
-              Total: $
-              {userOrder.reduce((acc, pizza) => {
-                return acc + pizza.price;
-              }, 0)}
-            </p>
-            <Space>
-              <Button
-                style={buttonStyle}
-                onClick={() => setCheckoutState(false)}
+              <h1
+                style={{
+                  fontSize: "30px",
+                  fontWeight: "bold",
+                }}
               >
-                Back
-              </Button>
+                Checkout
+              </h1>
+              <p
+                style={{
+                  fontSize: "20px",
+                  marginBottom: "20px",
+                }}
+              >
+                Total: $
+                {userOrder.reduce((acc, pizza) => {
+                  return acc + pizza.price;
+                }, 0)}
+              </p>
+              <Space>
+                <Button
+                  style={buttonStyle}
+                  onClick={() => setCheckoutState(false)}
+                >
+                  Back
+                </Button>
 
-              {/* <Button
-                style={buttonStyle}
-                onClick={() => alert("Order placed!")}
-              >
-                Place Order
-              </Button> */}
-              <Checkout cart={userOrder} buttonStyle={buttonStyle} />
-            </Space>
-          </div>
-        </>
+                {/* <Button
+                  style={buttonStyle}
+                  onClick={() => alert("Order placed!")}
+                >
+                  Place Order
+                </Button> */}
+                <Checkout cart={userOrder} buttonStyle={buttonStyle} />
+              </Space>
+            </div>
+          </>
+        ) : (
+          ordering({
+            userOrder,
+            setUserOrder,
+            checkoutState,
+            setCheckoutState,
+            columns,
+            data,
+            buttonStyle,
+          })
+        )
       ) : (
-        ordering({
-          userOrder,
-          setUserOrder,
-          checkoutState,
-          setCheckoutState,
-          columns,
-          data,
-          buttonStyle,
-        })
+        <h1>You are not authorized to view this page</h1>
       )}
     </>
   );
@@ -210,6 +230,16 @@ const ordering = ({
             }}
           >
             Clear
+          </Button>
+          <Button
+            style={buttonStyle}
+            onClick={() => {
+              // remove all local storage
+              localStorage.clear();
+              window.location.reload();
+            }}
+          >
+            Logout
           </Button>
         </Space>
       </Space>

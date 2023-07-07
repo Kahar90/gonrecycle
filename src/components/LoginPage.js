@@ -3,12 +3,19 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   signInWithPopup,
+  RecaptchaVerifier,
+  multiFactor,
+  signInWithTwoFactorCode,
+  PhoneAuthProvider,
 } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { GoogleAuthProvider } from "firebase/auth";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { Button, Form, Input, Space, message } from "antd";
+import speakeasy from "speakeasy";
+import { QRCodeSVG } from "qrcode.react";
+import TwoFactorScreen from "./2faScreen";
 
 const LoginPage = () => {
   const firebaseConfig = {
@@ -29,6 +36,8 @@ const LoginPage = () => {
     messageApi.info(message);
   };
 
+  const [secondAuthFlow, setsecondAuthFlow] = useState(false);
+
   const firebaseAuth = getAuth();
 
   const Router = useRouter();
@@ -41,12 +50,36 @@ const LoginPage = () => {
         values.username,
         values.password
       );
-      console.log(result);
-      Router.push("/");
+      // console.log(result);
+      // Router.push("/");
+      info("Login Success, please wait for 2fa");
+      setsecondAuthFlow(true);
     } catch (error) {
       info(error.message);
     }
   };
+
+  const secret = speakeasy.generateSecret();
+
+  const verifyToken = (token) => {
+    console.log(secret.ascii, "secret");
+    console.log(token, "token");
+    const stringtoken = token.toString();
+    return speakeasy.totp.verify({
+      secret: secret.ascii,
+      encoding: "ascii",
+      token: stringtoken,
+    });
+  };
+
+  if (secondAuthFlow) {
+    return (
+      <TwoFactorScreen
+        alreadySetUp={true}
+        email={firebaseAuth?.currentUser?.email}
+      />
+    );
+  }
 
   return (
     <>
@@ -83,6 +116,9 @@ const LoginPage = () => {
             Login
           </h1>
 
+          {/* <QRCodeSVG value={secret.otpauth_url} /> */}
+          {/* <br /> */}
+
           <Form
             name="basic"
             labelCol={{
@@ -107,6 +143,7 @@ const LoginPage = () => {
                 {
                   required: true,
                   message: "Please input your Email!",
+                  type: "email",
                 },
               ]}
             >
@@ -125,6 +162,20 @@ const LoginPage = () => {
             >
               <Input.Password />
             </Form.Item>
+
+            {/* <Form.Item
+              // hidden={true}
+              label="2fa code"
+              name="2fa"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your 2fa!",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item> */}
 
             <Form.Item
               wrapperCol={{
