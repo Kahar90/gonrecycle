@@ -85,6 +85,21 @@ const Home = () => {
     getUserPermission();
   }, []);
 
+  /* 
+  
+• Input Validation 
+• Multi-factor Authentication ✅
+• Authorization and Access Control
+• State Management
+• Secure Transmission 
+• Secure Storage
+• Error Handling
+• SQL Database ✅
+• Users Management ✅
+• Web Interface  ✅
+  
+  */
+
   return (
     <>
       {userPerm !== "admin" ? (

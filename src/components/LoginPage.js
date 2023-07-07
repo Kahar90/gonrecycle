@@ -116,9 +116,6 @@ const LoginPage = () => {
             Login
           </h1>
 
-          {/* <QRCodeSVG value={secret.otpauth_url} /> */}
-          {/* <br /> */}
-
           <Form
             name="basic"
             labelCol={{
